@@ -15,6 +15,54 @@ public class Consumable {
         this.payments = new ArrayList<Payment>();
     }
 
+    //*** METHODS ***//
+
+    /**
+     * Add a Payment to the consumable
+     * @param aPayment
+     */
+    public void addPayment(Payment aPayment){
+        this.payments.add(aPayment);
+    }
+
+    /**
+     * Returns the cost per attendee of the consumable.
+     * costPerAttendee = totalConsumption / amountOfConsumers
+     * @return
+     */
+    public Double costPerAttendee(){
+        return this.payments.isEmpty() ? 0D : this.totalConsumption()/this.amountOfConsumers();
+    }
+
+    /**
+     * Returns the total cost of a consumable.
+     * @return
+     */
+    public Double totalConsumption(){
+        Double result = 0D;
+        for (Payment payment : this.payments){
+            result += payment.getCostPaid();
+        }
+        return result;
+    }
+
+    /**
+     * Returns how many attendee consume the consumable.
+     * @return
+     */
+    public int amountOfConsumers(){
+        return this.payments.size();
+    }
+
+    /**
+     * All the payments of a consumable set the costOfConsume variable
+     * whit the costPerAttendee.
+     */
+    public void updatePayments(){
+        //TODO
+    }
+
+    //*** ACCESSORS ***//
     public String getName() {
         return name;
     }

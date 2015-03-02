@@ -5,13 +5,18 @@ package hachedeeme.jodamanager.model;
  */
 public class Payment {
     private Consumable consumable;
-    private Integer costPaid;
+    private Double costPaid;
 
+    public Payment(Double costPaid){
+        this.costPaid = costPaid;
+    }
+
+    //*** ACCESSORS ***//
     public Consumable getConsumable() {
         return consumable;
     }
 
-    public Integer getCostPaid() {
+    public Double getCostPaid() {
         return costPaid;
     }
 }
