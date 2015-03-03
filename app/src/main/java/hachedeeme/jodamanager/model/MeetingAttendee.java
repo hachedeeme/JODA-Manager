@@ -1,5 +1,6 @@
 package hachedeeme.jodamanager.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,21 +8,60 @@ import java.util.List;
  */
 public class MeetingAttendee {
     public String name;
-    public Integer totalCost;
-    public Integer finalCost;
+    public Double totalCost;
+    public Double finalCost;
     public List<Payment> payments;
 
+    public MeetingAttendee(String aName){
+        this.name = aName;
+        this.totalCost = 0D;
+        this.finalCost = 0D;
+        this.payments = new ArrayList<Payment>();
+    }
 
+    //***************//
+    //*** METHODS ***//
+    //***************//
+    /**
+     * Returns the total cost of all payments paid
+     * @return
+     */
+    public Double totalCostPaid(){
+        Double result = 0D;
+        for (Payment payment : this.payments){
+            result += payment.getCostPaid();
+        }
+        return result;
+    }
 
+    /**
+     * Pay a consumable.
+     * @param aCost
+     * @param aConsumable
+     */
+    public void pay(Double aCost, Consumable aConsumable){
+        this.addPayment(new Payment(aCost, aConsumable));
+    }
+
+    //***********//
+    //*** AUX ***//
+    //***********//
+    private void addPayment(Payment aPayment){
+        this.payments.add(aPayment);
+    }
+
+    //*****************//
+    //*** ACCESSORS ***//
+    //*****************//
     public String getName() {
         return name;
     }
 
-    public Integer getTotalCost() {
+    public Double getTotalCost() {
         return totalCost;
     }
 
-    public Integer getFinalCost() {
+    public Double getFinalCost() {
         return finalCost;
     }
 

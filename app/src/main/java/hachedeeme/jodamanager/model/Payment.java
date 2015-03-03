@@ -6,17 +6,30 @@ package hachedeeme.jodamanager.model;
 public class Payment {
     private Consumable consumable;
     private Double costPaid;
+    private Double costConsumable;
 
-    public Payment(Double costPaid){
+    public Payment(Double costPaid, Consumable aConsumable){
         this.costPaid = costPaid;
+        this.costConsumable = 0D;
+        this.consumable = aConsumable;
     }
 
+    //*****************//
     //*** ACCESSORS ***//
+    //*****************//
     public Consumable getConsumable() {
         return consumable;
     }
 
     public Double getCostPaid() {
         return costPaid;
+    }
+
+    public Double getCostConsumable() {
+        return costConsumable;
+    }
+
+    public void setCostConsumable(Double costConsumable) {
+        this.costConsumable = costConsumable;
     }
 }

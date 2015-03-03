@@ -14,11 +14,11 @@ public class TestPayment extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        this.payment = new Payment(50D);
+        this.payment = new Payment(50D, null);
     }
 
     @SmallTest
-    public void testCostPaidIs50(){
+    public void test_costPaid_should_be_50(){
         assertEquals(50D,payment.getCostPaid());
     }
 }

@@ -17,19 +17,19 @@ public class TestConsumable extends TestCase{
 
     private void addSomePaymentToTest(){
         this.consumable.getPayments().clear();
-        this.consumable.addPayment(new Payment(100D));
-        this.consumable.addPayment(new Payment(50D));
-        this.consumable.addPayment(new Payment(60D));
+        this.consumable.addPayment(new Payment(100D, null));
+        this.consumable.addPayment(new Payment(50D, null));
+        this.consumable.addPayment(new Payment(60D, null));
     }
 
     @SmallTest
-    public void test_consumableName_is_beer(){
+    public void test_consumableName_should_be_beer(){
         assertEquals("Beer", consumable.getName());
     }
 
     @SmallTest
     public void test_addPayment(){
-        Payment payment = new Payment(10D);
+        Payment payment = new Payment(10D, null);
         // payments is empty in this time
         assertTrue(this.consumable.getPayments().isEmpty());
         // when add a payment
@@ -48,7 +48,7 @@ public class TestConsumable extends TestCase{
         assertEquals(70D, this.consumable.costPerAttendee());
 
         // if add another consumable, the costPerAttendee should be 67.5
-        this.consumable.addPayment(new Payment(60D));
+        this.consumable.addPayment(new Payment(60D, null));
         assertEquals(67.5, this.consumable.costPerAttendee());
     }
 
@@ -60,7 +60,7 @@ public class TestConsumable extends TestCase{
         assertEquals(210D, this.consumable.totalConsumption());
 
         // if add another consumable, the totalConsumption should be 270.0
-        this.consumable.addPayment(new Payment(60D));
+        this.consumable.addPayment(new Payment(60D, null));
         assertEquals(270.0, this.consumable.totalConsumption());
     }
 
@@ -72,12 +72,18 @@ public class TestConsumable extends TestCase{
         assertEquals(3, this.consumable.amountOfConsumers());
 
         // if add another consumable, the amountOfConsumers should be 4
-        this.consumable.addPayment(new Payment(60D));
+        this.consumable.addPayment(new Payment(60D, null));
         assertEquals(4, this.consumable.amountOfConsumers());
     }
 
     @SmallTest
     public void test_updatePayments(){
-        //TODO
+        // add some payments to the consumable
+        this.addSomePaymentToTest();
+        this.consumable.updatePayments();
+        // the costConsumable of all payments should be 70.0
+        for (Payment payment : this.consumable.getPayments()){
+            assertEquals(70D, payment.getCostConsumable());
+        }
     }
 }

@@ -15,8 +15,9 @@ public class Consumable {
         this.payments = new ArrayList<Payment>();
     }
 
+    //***************//
     //*** METHODS ***//
-
+    //***************//
     /**
      * Add a Payment to the consumable
      * @param aPayment
@@ -59,10 +60,15 @@ public class Consumable {
      * whit the costPerAttendee.
      */
     public void updatePayments(){
-        //TODO
+        Double costConsumable = this.costPerAttendee();
+        for (Payment payment : this.payments){
+            payment.setCostConsumable(costConsumable);
+        }
     }
 
+    //*****************//
     //*** ACCESSORS ***//
+    //*****************//
     public String getName() {
         return name;
     }
