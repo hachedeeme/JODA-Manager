@@ -40,7 +40,9 @@ public class MeetingAttendee {
      * @param aConsumable
      */
     public void pay(Double aCost, Consumable aConsumable){
-        this.addPayment(new Payment(aCost, aConsumable));
+        Payment payment = new Payment(aCost, aConsumable);
+        aConsumable.addPayment(payment);
+        this.addPayment(payment);
     }
 
     //***********//

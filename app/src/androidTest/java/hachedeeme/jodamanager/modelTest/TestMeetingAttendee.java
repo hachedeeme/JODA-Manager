@@ -20,11 +20,10 @@ public class TestMeetingAttendee extends TestCase{
 
     private void addSomePaymentsToTest(){
         this.attendee.getPayments().clear();
-        this.attendee.pay(20D, null);
-        this.attendee.pay(100D, null);
-        this.attendee.pay(30D, null);
+        this.attendee.pay(20D, new Consumable("Beer"));
+        this.attendee.pay(100D, new Consumable("Ice Cream"));
+        this.attendee.pay(30D, new Consumable("Vegetables"));
     }
-
 
     @SmallTest
     public void test_pay_a_consumable(){
@@ -46,5 +45,10 @@ public class TestMeetingAttendee extends TestCase{
         this.addSomePaymentsToTest();
         // the totalCostPaid should be 150.0
         assertEquals(150D, this.attendee.totalCostPaid());
+    }
+
+    @SmallTest
+    public  void test_(){
+
     }
 }
