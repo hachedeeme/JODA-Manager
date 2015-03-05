@@ -26,6 +26,19 @@ public class TestMeetingAttendee extends TestCase{
     }
 
     @SmallTest
+    public void test_create_MeetingAttendee(){
+        // give an attendee created in the set up
+        // the name should be "Hache"
+        assertEquals("Hache", this.attendee.getName());
+        // the totalCost should be 0D
+        assertEquals(0D, this.attendee.getTotalCost());
+        // the finalCost should be 0D
+        assertEquals(0D, this.attendee.getFinalCost());
+        // and the list of payments should be empty
+        assertTrue(this.attendee.getPayments().isEmpty());
+    }
+
+    @SmallTest
     public void test_pay_a_consumable(){
         // In the beginning the attendee haven't payments
         assertTrue(this.attendee.getPayments().isEmpty());
@@ -38,6 +51,8 @@ public class TestMeetingAttendee extends TestCase{
         // and the firs payment should have costPaid = 50.0 and the Consumable("Beer")
         assertEquals(50D, this.attendee.getPayments().get(0).getCostPaid());
         assertEquals(consumable, this.attendee.getPayments().get(0).getConsumable());
+        // and the unique payment that have the consumable is costPaid = 50.0
+        assertEquals(50D, consumable.getPayments().get(0).getCostPaid());
     }
 
     @SmallTest
@@ -48,7 +63,69 @@ public class TestMeetingAttendee extends TestCase{
     }
 
     @SmallTest
-    public  void test_(){
+    public void test_totalCost_should_be_150(){
+        // Given some payments added
+        this.addSomePaymentsToTest();
+        // the totalConsumablesCost should be 150.0
+        assertEquals(150D, this.attendee.getTotalCost());
+    }
 
+    @SmallTest
+    public void test_finalCost_should_be_0(){
+        // Given some payments added
+        this.addSomePaymentsToTest();
+        // the totalConsumablesCost should be 120.0
+        assertEquals(0D, this.attendee.getFinalCost());
+    }
+
+    @SmallTest
+    public void test_totalCost_and_totalCost_large_case(){
+        // Given some Consumables
+        Consumable salad    = new Consumable("Salad");
+        Consumable barbecue = new Consumable("Barbecue");
+        Consumable wine     = new Consumable("Wine");
+        Consumable grenadine= new Consumable("Grenadine");
+        Consumable cheese   = new Consumable("Cheese ");
+        // and some attendees who pay
+        MeetingAttendee hache = new MeetingAttendee("Hache");
+        hache.pay(20D, salad);
+        hache.pay(100D, barbecue);
+        hache.pay(30D, wine);
+
+        MeetingAttendee sol = new MeetingAttendee("Sol");
+        sol.pay(10D, salad);
+        sol.pay(0D, barbecue);
+        sol.pay(30D, cheese);
+        sol.pay(30D, grenadine);
+
+        MeetingAttendee leo = new MeetingAttendee("Leo");
+        leo.pay(0D, salad);
+        leo.pay(0D, cheese);
+        leo.pay(0D, grenadine);
+
+        hache.updateAttendee();
+        sol.updateAttendee();
+        leo.updateAttendee();
+
+        // then hache's totalCostPaid should be 150.0
+        assertEquals(150D, hache.totalCostPaid());
+        // then hache's totalCost should be 90.0
+        assertEquals(90D, hache.getTotalCost());
+        // then hache's finalCost should be -60.0
+        assertEquals(-60D, hache.getFinalCost());
+
+        // then sol's totalCostPaid should be 150.0
+        assertEquals(70D, sol.totalCostPaid());
+        // then sol's totalCost should be 90.0
+        assertEquals(90D, sol.getTotalCost());
+        // then sol's finalCost should be -60.0
+        assertEquals(20D, sol.getFinalCost());
+
+        // then leo's totalCostPaid should be 150.0
+        assertEquals(0D, leo.totalCostPaid());
+        // then leo's totalCost should be 90.0
+        assertEquals(40D, leo.getTotalCost());
+        // then leo's finalCost should be -60.0
+        assertEquals(40D, leo.getFinalCost());
     }
 }

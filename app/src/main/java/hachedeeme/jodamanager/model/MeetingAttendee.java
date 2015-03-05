@@ -23,7 +23,7 @@ public class MeetingAttendee {
     //*** METHODS ***//
     //***************//
     /**
-     * Returns the total cost of all payments paid
+     * Returns the total cost of all payments paid.
      * @return
      */
     public Double totalCostPaid(){
@@ -42,7 +42,35 @@ public class MeetingAttendee {
     public void pay(Double aCost, Consumable aConsumable){
         Payment payment = new Payment(aCost, aConsumable);
         aConsumable.addPayment(payment);
+        aConsumable.updatePayments();
         this.addPayment(payment);
+        this.totalCost = totalConsumablesCost();
+        this.finalCost = calculateFinalCost();
+    }
+
+    public void updateAttendee(){
+        this.totalCost = totalConsumablesCost();
+        this.finalCost = calculateFinalCost();
+    }
+
+    /**
+     * Returns the total of all consumables cost.
+     * @return
+     */
+    private Double totalConsumablesCost(){
+        Double totalConsumableCost = 0D;
+        for (Payment payment : this.payments){
+            totalConsumableCost += payment.getCostConsumable();
+        }
+        return totalConsumableCost;
+    }
+
+    /**
+     * Returns the final cost to pay.
+     * @return
+     */
+    private Double calculateFinalCost(){
+        return this.getTotalCost() - totalCostPaid();
     }
 
     //***********//
