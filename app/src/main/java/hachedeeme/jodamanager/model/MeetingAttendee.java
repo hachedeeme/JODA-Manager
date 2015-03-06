@@ -40,12 +40,10 @@ public class MeetingAttendee {
      * @param aConsumable
      */
     public void pay(Double aCost, Consumable aConsumable){
-        Payment payment = new Payment(aCost, aConsumable);
+        Payment payment = new Payment(aCost, aConsumable, this);
+        this.addPayment(payment);
         aConsumable.addPayment(payment);
         aConsumable.updatePayments();
-        this.addPayment(payment);
-        this.totalCost = totalConsumablesCost();
-        this.finalCost = calculateFinalCost();
     }
 
     public void updateAttendee(){

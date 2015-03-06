@@ -74,7 +74,7 @@ public class TestMeetingAttendee extends TestCase{
     public void test_finalCost_should_be_0(){
         // Given some payments added
         this.addSomePaymentsToTest();
-        // the totalConsumablesCost should be 120.0
+        // the totalConsumablesCost should be 0.0
         assertEquals(0D, this.attendee.getFinalCost());
     }
 
@@ -103,10 +103,6 @@ public class TestMeetingAttendee extends TestCase{
         leo.pay(0D, cheese);
         leo.pay(0D, grenadine);
 
-        hache.updateAttendee();
-        sol.updateAttendee();
-        leo.updateAttendee();
-
         // then hache's totalCostPaid should be 150.0
         assertEquals(150D, hache.totalCostPaid());
         // then hache's totalCost should be 90.0
@@ -127,5 +123,17 @@ public class TestMeetingAttendee extends TestCase{
         assertEquals(40D, leo.getTotalCost());
         // then leo's finalCost should be -60.0
         assertEquals(40D, leo.getFinalCost());
+
+        MeetingAttendee gaga = new MeetingAttendee("Gaga");
+        gaga.pay(0D, wine);
+        gaga.pay(0D, barbecue);
+        gaga.pay(0D, salad);
+
+        // then hache's totalCostPaid should be 150.0
+        assertEquals(150D, hache.totalCostPaid());
+        // then hache's totalCost should be 90.0
+        assertEquals(55.83, hache.getTotalCost());
+        // then hache's finalCost should be -60.0
+        assertEquals(-94.17, hache.getFinalCost());
     }
 }

@@ -3,6 +3,8 @@ package hachedeeme.jodamanager.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import hachedeeme.jodamanager.utils.MathUtils;
+
 /**
  * Created by Hache on 03/02/2015.
  */
@@ -32,7 +34,9 @@ public class Consumable {
      * @return
      */
     public Double costPerAttendee(){
-        return this.payments.isEmpty() ? 0D : this.totalConsumption()/this.amountOfConsumers();
+        return this.payments.isEmpty() ?
+                0D :
+                MathUtils.roundTwoDecimals(this.totalConsumption()/this.amountOfConsumers());
     }
 
     /**
@@ -63,6 +67,7 @@ public class Consumable {
         Double costConsumable = this.costPerAttendee();
         for (Payment payment : this.payments){
             payment.setCostConsumable(costConsumable);
+            payment.getAttendee().updateAttendee();
         }
     }
 
