@@ -110,18 +110,18 @@ public class TestMeetingAttendee extends TestCase{
         // then hache's finalCost should be -60.0
         assertEquals(-60D, hache.getFinalCost());
 
-        // then sol's totalCostPaid should be 150.0
+        // then sol's totalCostPaid should be 70.0
         assertEquals(70D, sol.totalCostPaid());
         // then sol's totalCost should be 90.0
         assertEquals(90D, sol.getTotalCost());
-        // then sol's finalCost should be -60.0
+        // then sol's finalCost should be 20.0
         assertEquals(20D, sol.getFinalCost());
 
-        // then leo's totalCostPaid should be 150.0
+        // then leo's totalCostPaid should be 0.0
         assertEquals(0D, leo.totalCostPaid());
-        // then leo's totalCost should be 90.0
+        // then leo's totalCost should be 40.0
         assertEquals(40D, leo.getTotalCost());
-        // then leo's finalCost should be -60.0
+        // then leo's finalCost should be 40.0
         assertEquals(40D, leo.getFinalCost());
 
         MeetingAttendee gaga = new MeetingAttendee("Gaga");
@@ -135,5 +135,19 @@ public class TestMeetingAttendee extends TestCase{
         assertEquals(55.83, hache.getTotalCost());
         // then hache's finalCost should be -60.0
         assertEquals(-94.17, hache.getFinalCost());
+
+        // then sol's totalCostPaid should be 70.0
+        assertEquals(70D, sol.totalCostPaid());
+        // then sol's totalCost should be 70.83
+        assertEquals(70.83, sol.getTotalCost());
+        // then sol's finalCost should be -60.0
+        assertEquals(0.83, sol.getFinalCost());
+
+        // then leo's totalCostPaid should be 0.0
+        assertEquals(0D, leo.totalCostPaid());
+        // then leo's totalCost should be 37.5
+        assertEquals(37.5, leo.getTotalCost());
+        // then leo's finalCost should be 37.5
+        assertEquals(37.5, leo.getFinalCost());
     }
 }

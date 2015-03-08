@@ -3,6 +3,8 @@ package hachedeeme.jodamanager.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import hachedeeme.jodamanager.utils.MathUtils;
+
 /**
  * Created by Hache on 03/02/2015.
  */
@@ -68,7 +70,7 @@ public class MeetingAttendee {
      * @return
      */
     private Double calculateFinalCost(){
-        return this.getTotalCost() - totalCostPaid();
+        return MathUtils.roundTwoDecimals(this.getTotalCost() - totalCostPaid());
     }
 
     //***********//
