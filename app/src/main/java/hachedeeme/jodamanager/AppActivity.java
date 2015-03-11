@@ -4,14 +4,21 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
+
+import hachedeeme.jodamanager.model.AttendeeListAdapter;
 
 
 public class AppActivity extends ActionBarActivity {
+
+    private ExpandableListView attendeeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
+        attendeeList = (ExpandableListView) findViewById(R.id.attendeeList);
+        attendeeList.setAdapter(new AttendeeListAdapter(this));
     }
 
 
